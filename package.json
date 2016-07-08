@@ -45,9 +45,10 @@
     "gulp-sequence": "^0.4.5",
     "gulp-uglify": "^1.5.2",
     "rollup": "^0.32.2",
-    "rollup-plugin-babel": "^2.6.0"
+    "rollup-plugin-babel": "^2.6.0",
+    "rollup-plugin-node-resolve": "^1.7.1"
   },
   "dependencies": {
-    "d3": "^3.5.17"
+    "d3": "^4.0.0-rc.2"
   }
 }

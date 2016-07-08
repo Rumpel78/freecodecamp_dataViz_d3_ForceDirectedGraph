@@ -1,12 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
 
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
 
-const svg = d3.select("svg");
-const width = +svg.attr("width");
-const height = +svg.attr("height");
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
 
-const color = d3.scaleOrdinal(d3.schemeCategory20);
+</style>
+<svg width="960" height="600"></svg>
+<script src="js/vendor.js"></script>
+<script>
 
-const simulation = d3.forceSimulation()
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
@@ -14,14 +31,14 @@ const simulation = d3.forceSimulation()
 d3.json("datasets/miserables.json", function(error, graph) {
   if (error) throw error;
 
-  const link = svg.append("g")
+  var link = svg.append("g")
       .attr("class", "links")
     .selectAll("line")
     .data(graph.links)
     .enter().append("line")
       .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
-  const node = svg.append("g")
+  var node = svg.append("g")
       .attr("class", "nodes")
     .selectAll("circle")
     .data(graph.nodes)
@@ -72,3 +89,5 @@ function dragended(d) {
   d.fx = null;
   d.fy = null;
 }
+
+</script>

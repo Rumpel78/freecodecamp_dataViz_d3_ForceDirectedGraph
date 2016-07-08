@@ -4,6 +4,7 @@ var gulpSequence = require('gulp-sequence');
 
 var rollup = require('rollup');
 var babel = require('rollup-plugin-babel');
+var npm = require('rollup-plugin-node-resolve');
 
 var browserSync = require('browser-sync');
 
@@ -42,7 +43,8 @@ gulp.task('build:js:main', function() {
  return rollup.rollup({
    entry: './src/js/index.js',
    plugins: [
-		 babel({ runtimeHelpers: true })
+		 babel({ runtimeHelpers: true }),
+     npm({ jsnext: true, main: true })
 	 ]
  }).then( function ( bundle ) {
    bundle.write({
@@ -56,7 +58,7 @@ gulp.task('build:js:main', function() {
 
 // Javascript VENDOR
 gulp.task('build:js:vendor', () => {
-  return gulp.src('./node_modules/d3/d3.min.js')
+  return gulp.src(['./node_modules/d3/d3.min.js'])
     .pipe(concat('vendor.js'))
     .pipe(compressJs())
     .pipe(gulp.dest('build/js'));

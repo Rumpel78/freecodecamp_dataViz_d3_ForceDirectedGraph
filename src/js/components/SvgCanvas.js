@@ -109,6 +109,7 @@ export default class SvgCanvas {
             .attr('y', this.drawingArea.height - 5);
   }
 
+  // Tooltip functions
   onMouseOver(dataItem) {
     const content = this.tooltipSetContent(dataItem);
     if (content !== '') {
