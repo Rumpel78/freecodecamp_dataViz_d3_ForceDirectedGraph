@@ -4,7 +4,7 @@ module.exports = {
   devtool: 'source-map',
   bail: false,
   output: {
-    filename: 'main.js'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
