@@ -1,8 +1,8 @@
 export default {
-  canvasWidth: 800,
-  canvasHeight: 550,
-  padding: [80, 40, 40, 40],
-  dataUrl: 'datasets/data.json',
-  labelX: 'X Axis',
-  labelY: 'Y Axis',
+    canvasWidth: 1024,
+    canvasHeight: 768,
+    padding: [0, 0, 0, 0],
+    dataUrl: 'datasets/countries.json',
+    labelX: 'X Axis',
+    labelY: 'Y Axis',
 };
