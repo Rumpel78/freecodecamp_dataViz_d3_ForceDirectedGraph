@@ -2,9 +2,7 @@
 var gulp = require('gulp');
 var gulpSequence = require('gulp-sequence');
 
-var rollup = require('rollup');
-var babel = require('rollup-plugin-babel');
-var npm = require('rollup-plugin-node-resolve');
+var webpack = require('webpack-stream');
 
 var browserSync = require('browser-sync');
 
@@ -31,38 +29,26 @@ gulp.task('browser-sync', function() {
 
 // Watch
 gulp.task('watch', function() {
-  gulp.watch('src/js/**/*.js', ['build:js:main']);
+  gulp.watch('src/js/**/*.js', ['build:js']);
   gulp.watch('src/css/**/*.css', ['build:css']);
   gulp.watch('src/*.html', ['build:html:dev']);
   gulp.watch('src/datasets/*', ['move:datasets']);
   gulp.watch('src/fonts/*', ['move:fonts']);
 });
 
-// Javascript VENDOR
-gulp.task('build:js:main', function() {
- return rollup.rollup({
-   entry: './src/js/index.js',
-   plugins: [
-		 babel({ runtimeHelpers: true }),
-     npm({ jsnext: true, main: true })
-	 ]
- }).then( function ( bundle ) {
-   bundle.write({
-     format: 'iife',
-     sourceMap: true,
-     dest: './build/js/main.js'
-   });
-   browserSync.reload();
- });
+// Javascript 
+gulp.task('build:js', function() {
+  return gulp.src('./src/js/index.js')
+    .pipe(
+      webpack(require('./webpack.config.js'), null, (err,stat)=>{browserSync.reload()})
+      .on('error', function(error) {
+            console.error(error.message);
+            this.emit('end');
+      })   
+     )
+    .pipe(gulp.dest('./build/js'));
 });
 
-// Javascript VENDOR
-gulp.task('build:js:vendor', () => {
-  return gulp.src(['./node_modules/d3/d3.min.js'])
-    .pipe(concat('vendor.js'))
-    .pipe(compressJs())
-    .pipe(gulp.dest('build/js'));
-});
 
 // COMPRESSION
 gulp.task('compress:js', ['clean:map'], function() {
@@ -132,7 +118,7 @@ gulp.task('clean:map', function () {
 });
 
 gulp.task('move', ['move:datasets', 'move:fonts', 'move:assets']);
-gulp.task('build:assets', ['build:js:main', 'build:js:vendor', 'build:css', 'move']);
+gulp.task('build:assets', ['build:js', 'build:css', 'move']);
 gulp.task('compress', ['compress:js', 'compress:css']);
 
 gulp.task('default', gulpSequence('clean', ['build:html:dev', 'build:assets'], 'browser-sync', 'watch'));

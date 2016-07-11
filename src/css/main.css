@@ -19,6 +19,10 @@ body {
   fill: blue;
 }
 
+line {
+  stroke: #999;
+}
+
 text {
   font-size: 0.7em;
 }
