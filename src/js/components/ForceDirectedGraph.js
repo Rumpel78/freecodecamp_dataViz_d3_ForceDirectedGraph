@@ -41,7 +41,7 @@ export default class ForceDirectedGraph extends SvgCanvas {
   }
 
   dragstarted(d) {
-    if (!d3.event.active) this.simulation.alphaTarget(0.3).restart();
+    if (!d3.event.active) this.simulation.alphaTarget(0.1).restart();
     d.fx = d.x;
     d.fy = d.y;
   }

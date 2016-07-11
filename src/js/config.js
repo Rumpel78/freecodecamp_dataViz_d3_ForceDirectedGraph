@@ -1,6 +1,6 @@
 export default {
-  canvasWidth: 1024,
-  canvasHeight: 768,
+  canvasWidth: 960,
+  canvasHeight: 600,
   padding: [0, 0, 0, 0],
   dataUrl: 'datasets/countries.json',
   labelX: 'X Axis',

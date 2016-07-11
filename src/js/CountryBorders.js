@@ -4,9 +4,10 @@ export default class CountryBorders extends ForceDirectedGraph {
    postprocessData(data) {
     // Expecting data in form of 2 arrays: nodes[id] and array links[source-id,target-id]
      this.simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().id((d, i) => i).strength(0.1))
-      .force('charge', d3.forceManyBody().strength(-5))
-      .force('center', d3.forceCenter(this.width / 2, this.height / 2));
+      .force('link', d3.forceLink().id((d, i) => i))
+      .force('charge', d3.forceManyBody().distanceMax(500).distanceMin(100).strength(-4))
+      .force('center', d3.forceCenter(this.width / 2, this.height / 2))
+      .velocityDecay(0.4);
      return data;
    }
    createGraph(parentElement) {
