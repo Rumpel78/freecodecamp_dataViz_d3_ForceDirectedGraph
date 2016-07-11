@@ -3,20 +3,17 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   text-align: center;
 }
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+
+svg {
+  border: 1px solid #999;
 }
-.dataItem {
+
+.datanode {
   stroke: black;
-}
-.dataItem.red {
   fill: red;
-}
-.dataItem.blue {
-  fill: blue;
+  border: 1px solid green;
+  color:blue;
+  background-color: coral;
 }
 
 line {
@@ -25,6 +22,20 @@ line {
 
 text {
   font-size: 0.7em;
+}
+
+.flagContainer{
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  margin: 0 auto;
+  border: 1px solid red;
+  overflow: hidden;
+}
+.flag {
+  position: absolute;
+  top: 0px;
+  left:0px;
 }
 
 /* KUDOS: http://bl.ocks.org/d3noob/a22c42db65eb00d4e369 */

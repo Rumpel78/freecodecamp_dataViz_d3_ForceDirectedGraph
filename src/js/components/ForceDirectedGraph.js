@@ -2,7 +2,7 @@ import SvgCanvas from './SvgCanvas';
 
 export default class ForceDirectedGraph extends SvgCanvas {
   postprocessData(data) {
-    // Expecting data in form of 2 arrays: nodes[id, color] and array links[source-id,target-id]
+    // Expecting data in form of 2 arrays: nodes[id] and array links[source-id,target-id]
     this.simulation = d3.forceSimulation()
       .force('link', d3.forceLink().id(d => d.id))
       .force('charge', d3.forceManyBody())
@@ -12,13 +12,13 @@ export default class ForceDirectedGraph extends SvgCanvas {
 
   createGraph(parentElement) {
     const linksGroup = parentElement.append('g').attr('class', 'links');
-    const itemsLinks = linksGroup.selectAll('line').data(this.data.links);
+    const itemsLinks = linksGroup.selectAll('dataLine').data(this.data.links);
     this.itemsExit(itemsLinks.exit(), false);
     this.links = this.itemsEnter(itemsLinks.enter(), false);
     this.itemsUpdate(itemsLinks, false);
 
     const nodesGroup = parentElement.append('g').attr('class', 'nodes');
-    const itemsNodes = nodesGroup.selectAll('circle').data(this.data.nodes);
+    const itemsNodes = nodesGroup.selectAll('dataNode').data(this.data.nodes);
     this.itemsExit(itemsNodes.exit(), true);
     this.nodes = this.itemsEnter(itemsNodes.enter(), true);
     this.itemsUpdate(itemsNodes, true);
@@ -72,7 +72,6 @@ export default class ForceDirectedGraph extends SvgCanvas {
             .on('start', d => this.dragstarted(d))
             .on('drag', d => this.dragged(d))
             .on('end', d => this.dragended(d)));
-
     }
     return items.append('line')
            .attr('class', 'dataLine')
