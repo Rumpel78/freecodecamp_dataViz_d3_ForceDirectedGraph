@@ -30,7 +30,7 @@ gulp.task('browser-sync', function() {
 // Watch
 gulp.task('watch', function() {
   gulp.watch('src/js/**/*.js', ['build:js']);
-  gulp.watch('src/css/**/*.css', ['build:css']);
+  gulp.watch('src/css/**/*', ['build:css']);
   gulp.watch('src/*.html', ['build:html:dev']);
   gulp.watch('src/datasets/*', ['move:datasets']);
   gulp.watch('src/fonts/*', ['move:fonts']);
@@ -80,7 +80,7 @@ gulp.task('build:html:dist', function() {
 
 // CSS
 gulp.task('build:css', function() {
-  return gulp.src('./src/css/*.css')
+  return gulp.src('./src/css/**/*')
   .pipe(gulp.dest('build/css'))
   .pipe(reload({stream:true}));
 });
