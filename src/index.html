@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <title>Meteor Strikes</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css/flags.css">
     <link rel="stylesheet" href="css/main.css">
-    <script>
-        var ENV = '__REPLACE_ENV__';
-    </script>
+</head>
 
-    <body>
-        <div class="wrapper">
-            <h1>Force Directed Graph of State Contiguity</h1>
-            <div class="plot">
-                <div class="flagContainer"></div>
-            </div>
-            <a href='https://github.com/Rumpel78/freecodecamp_dataViz_d3_forceDirectedGraph' target="_blank">Github Repo of this page</a>
-        </div>
-    </body>
-    <script src="js/bundle.js"></script>
+<body>
+    <div class="container">
+        <h1>Force Directed Graph of State Contiguity</h1>
+            <div class="flagContainer"></div>
+            <svg width="1024" height="800"></svg>
+    </div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="app.js"></script>
+</body>
 
 </html>
